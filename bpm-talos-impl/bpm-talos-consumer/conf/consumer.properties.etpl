@@ -1,0 +1,5 @@
+traceUrl={{_ .ELE_TRACE_URL}}
+
+nThreads={{_ .N_THREADS 10}}
+timeTip={{_ .TIME_TIP 100}}
+maxCycle={{_ .MAX_CYCLE 4}}

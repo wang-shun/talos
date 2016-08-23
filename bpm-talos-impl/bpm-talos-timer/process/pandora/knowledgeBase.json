@@ -1,0 +1,111 @@
+processes : {
+    0: {
+        business_name:"pandora_wiki",                   # 索引业务名称
+        cluster_name: "es_cluster_birds",               # 索引集群名称(真正集群ip会从huskar读取)
+        start_index_key: "pandora_wiki",                # 获取增量索引起始值的索引名称(可以通配符形式)
+        start_doctype_key: "wiki",                      # 获取增量索引起始值的文档(可为none,不能以通配符形式)
+        doc_mapping: "pandora_wiki",
+        index_route:{
+            route_name: "pure_value",                   # 索引路由器名称
+            route_params: {                             # 路由器参数
+                "name": "pandora_wiki"
+            }
+        },
+        doctype_route:{
+            route_name:"pure_value",                    # 文档路由器名称
+            route_params: {                             # 路由器参数
+                "name": "wiki"
+            }
+        },
+        slave_limit_name: "time_stamp_limiter",         # 从库安全索引的限制器名称
+        slave_limit_params: {                           # 限制器参数
+            "time_stamp": "updated_at",
+            "interval": 30
+        },
+
+        database_name: "pandora_database",              # 等待拉取数据的数据库名称
+        table_name: "article",                          # 数据表名称
+        doc_preconditions: none,                        # 文档前置处理条件
+        table_preconditions: none,                      # 数据表前置处理条件
+        doc_according_key: "updated_at",                # 文档关联字段
+        table_according_key: "updated_at",              # 数据库关联字段
+        select_columns: ["id", "title", "category_id",
+                         "content", "creator_id",
+                         "creator_name", "updated_at",
+                         "created_at", "status"],       # 数据表中需要拉取的字段
+        column_map: {
+            "id": "id",
+            "title": "title",
+            "status": "status",
+            "category_id": "category_id",
+            "content": "content",
+            "creator_id": "creator_id",
+            "creator_name": "creator_name",
+            "updated_at": "updated_at",
+            "created_at": "created_at"
+        },                                                  # 索引文档字段-数据表字段 映射规则
+        necessary_columns:[]                                # 文档中必须包含的字段
+    },
+    1: {
+        database_name: "pandora_database",                      # 待拼接数据的数据库名称
+        table_name: "category",                     # 数据表名称
+        doc_preconditions:[],                               # 文档前置处理条件
+        table_preconditions: none,                          # 数据表前置处理条件
+        doc_according_key: "category_id",                   # 文档关联字段
+        table_according_key: "id",                          # 数据表关联字段
+        select_columns: ["pid", "id", "name"],      # 数据表中需要拉取的字段
+        column_map: {
+            "pid": "pid",
+            "category_name": "name",
+        },                                                  # 索引文档字段-数据表字段 映射规则
+        necessary_columns:[],                                # 文档中必须包含的字段
+        list_fields: ["category_name", "pid"],                      # 指定多值域
+
+    },
+    2: {
+        database_name: "pandora_database",                      # 待拼接数据的数据库名称
+        table_name: "category",                     # 数据表名称
+        doc_preconditions:none,                               # 文档前置处理条件
+        table_preconditions: none,                          # 数据表前置处理条件
+        doc_according_key: "pid",                   # 文档关联字段
+        table_according_key: "id",                          # 数据表关联字段
+        select_columns: ["pid", "id", "name"],              # 数据表中需要拉取的字段
+        column_map: {
+            "pid": "pid",
+            "category_name": "name",
+        },                                                  # 索引文档字段-数据表字段 映射规则
+        necessary_columns:[],                                # 文档中必须包含的字段
+        list_fields: ["category_name", "pid"],                      # 指定多值域
+    },
+    3: {
+        database_name: "pandora_database",                      # 待拼接数据的数据库名称
+        table_name: "category",                     # 数据表名称
+        doc_preconditions:none,                               # 文档前置处理条件
+        table_preconditions: none,                          # 数据表前置处理条件
+        doc_according_key: "pid",                   # 文档关联字段
+        table_according_key: "id",                          # 数据表关联字段
+        select_columns: ["pid", "id", "name"],              # 数据表中需要拉取的字段
+        column_map: {
+            "pid": "pid",
+            "category_name": "name",
+        },                                                  # 索引文档字段-数据表字段 映射规则
+        necessary_columns:[],                                # 文档中必须包含的字段
+        list_fields: ["category_name", "pid"],                      # 指定多值域
+        drop_doc_according_key: true                        # 删除文档中的关联字段
+    },
+    4: {
+        database_name: "pandora_database",                   # 待拼接数据的数据库名称
+        table_name: "article_label",           # 数据表名称
+        doc_preconditions:[],                               # 文档前置处理条件
+        table_preconditions: none,      # 数据表前置处理条件
+        doc_according_key: "id",                            # 文档关联字段
+        table_according_key: "article_id",               # 数据表关联字段
+        select_columns: ["article_id",
+                         "label"],                  # 数据表中需要拉取的字段
+        column_map: {
+            "labels": "label",
+        },                                                  # 索引文档字段-数据表字段 映射规则
+        necessary_columns:[],                                # 文档中必须包含的字段
+        list_fields: ["labels"],                      # 指定多值域
+    }
+}

@@ -1,0 +1,5 @@
+mq.host={{_ .MQ_HOST}}
+mq.virtual.host={{_ .MQ_VIRTUAL_HOST}}
+mq.username={{_ .MQ_USERNAME}}
+mq.password={{_ .MQ_PASSWORD}}
+mq.port={{_ .MQ_PORT}}

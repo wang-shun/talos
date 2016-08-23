@@ -1,0 +1,6 @@
+bd.cluster = {{_ .BD_CLUSTER}}
+bd.host = {{_ .BD_HOST}}
+bd.port = {{_ .BD_PORT}}
+pandora.cluster = {{_ .PAN_CLUSTER}}
+pandora.host = {{_ .PAN_HOST}}
+pandora.port = {{_ .PAN_PORT}}

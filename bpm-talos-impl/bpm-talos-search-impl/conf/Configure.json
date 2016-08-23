@@ -1,0 +1,23 @@
+{
+  "commonConf": {
+    "huskarUrl": "soa-zk.alpha.elenet.me:8020",
+    "huskarToken": "eyJhbGciOiJIUzI1NiIsImV4cCI6MjgxNzM5ODA4Njc2LCJpYXQiOjE0NDc4NDA2NzZ9.eyJ1c2VybmFtZSI6ImFkbWluIn0.sRxFS5OivgNh80IiH-bBB7n6-ITMt6QeP1sIRAiV2wc",
+    "metricUrl": "",
+    "traceUrl":""
+  },
+  "serverConf": {
+    "name": "Bpm.Talos.Search",
+    "protocol": "json",
+    "group":"local",
+    "port": 8094,
+    "threadPoolSize": 100,
+    "bufferQueueSize": 100,
+    "initializer": "me.ele.bpm.talos.search.soa.SearchServiceInitializer",
+    "interfaces": [
+      "me.ele.bpm.talos.search.service.ISearchOrder4Pandora",
+      "me.ele.bpm.talos.search.service.ISearchOrderService",
+      "me.ele.bpm.talos.search.service.ISearchKnowledgeBaseService",
+      "me.ele.bpm.talos.search.service.ICommonSearchService"
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	   http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context-3.1.xsd
+	   http://www.springframework.org/schema/task 
+	   http://www.springframework.org/schema/task/spring-task-3.1.xsd">
+
+	<context:component-scan base-package="me.ele.bpm.talos.timer" />
+	
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:common.properties</value>
+            </list>
+        </property>
+        <property name="fileEncoding" value="UTF-8"/>
+        <property name="ignoreResourceNotFound" value="false"/>
+    </bean>
+	
+	<bean id="taskScheduler" class="me.ele.bpm.talos.timer.task.TaskScheduler" />
+	
+	<task:executor id="executor" pool-size="5" />
+	<task:scheduler id="scheduler" pool-size="10" />
+	<task:annotation-driven executor="executor" scheduler="scheduler" />
+	
+<!--     <task:scheduled-tasks>
+        <task:scheduled ref="taskScheduler" method="activityTask" cron="${family.activity.cron}"/>
+    </task:scheduled-tasks> -->
+	
+</beans>

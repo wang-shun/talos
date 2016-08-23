@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>me.ele</groupId>
+	<artifactId>bpm-talos-core</artifactId>
+	<name>bpm-talos-core</name>
+	<version>2.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<properties>
+		<!-- bpm-talos.version -->
+		<bpm-talos.version>2.0.1-SNAPSHOT</bpm-talos.version>
+		
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java-version>1.8</java-version>
+		
+		<!-- Spring -->
+		<spring-framework.version>4.2.1.RELEASE</spring-framework.version>
+
+		<!-- rabbit mq -->
+		<rabbitmq-client>3.5.4</rabbitmq-client>
+		<spring-rabbitmq>1.5.0.RELEASE</spring-rabbitmq>
+		<fastjson-version>1.2.6</fastjson-version>
+		
+		<org-apache-commons-version>3.3.2</org-apache-commons-version>
+		
+		<!-- soa -->
+		<eleme.soa.version>2.0.5</eleme.soa.version>
+	</properties>
+
+	<modules>
+		<module>bpm-talos-search</module>
+		<module>../bpm-talos-impl</module>
+	</modules>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>me.ele</groupId>
+			<artifactId>elastic.util.giraffe</artifactId>
+			<version>1.1.0-SNAPSHOT</version>
+		</dependency>
+		<!-- soa -->
+		<dependency>
+			<groupId>eleme-jarch</groupId>
+			<artifactId>pylon-core</artifactId>
+			<version>${eleme.soa.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>log4j</artifactId>
+					<groupId>log4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${org-apache-commons-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.7</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-compiler-plugin</artifactId>
+			    <version>3.2</version>
+			    <configuration>
+			        <source>${java-version}</source>
+			        <target>${java-version}</target>
+			        <compilerArgs>
+			            <arg>-parameters</arg>
+			        </compilerArgs>
+			    </configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<distributionManagement>
+		<repository>
+			<id>ele-bpm-release</id>
+			<url>http://maven.dev.elenet.me/nexus/content/repositories/ele-bpm-release/</url>
+		</repository>
+		<snapshotRepository>
+			<id>ele-bpm-snapshots</id>
+			<url>http://maven.dev.elenet.me/nexus/content/repositories/ele-bpm-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+</project>
+

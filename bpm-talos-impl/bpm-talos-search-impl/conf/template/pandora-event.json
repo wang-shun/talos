@@ -1,0 +1,25 @@
+{
+  "id": 3,
+  "enable": true,
+  "businessName": "pandora_event",
+  "clusterName": "birds",
+  "indexRouter": {
+    "routerName": "pure value router",
+    "routerParams": {
+      "name": "pandora_event"
+    }
+  },
+  "doctypeRouter": {
+    "routerName": "pure value router",
+    "routerParams": {
+      "name": "event"
+    }
+  },
+  "appendConfig":{
+    "template": "{\"template\": {\"query\": {\"bool\": {\"must\": [ {{#priority}}{\"terms\": {\"priority\": {{priority}}}},{{/priority}}   {{#status}}{\"terms\": {\"status\": {{status}}}},{{/status}}   {{#source_id}}{\"term\": {\"source_id\": \"{{source_id}}\"}},{{/source_id}}   {{#source_value}}{\"term\": {\"source_value\": \"{{source_value}}\"}},{{/source_value}}   {{#type_id}}{\"term\": {\"type_id\": \"{{type_id}}\"}},{{/type_id}}  {\"range\": {\"created_at\": { {{#from_dateTime}}\"from\": \"{{from_dateTime}}\"{{/from_dateTime}} }}}, {\"range\": {\"created_at\": { {{#to_dateTime}}\"to\": \"{{to_dateTime}}\"{{/to_dateTime}} }}},  {{#creator_id}}{\"term\": {\"creator_id\": \"{{creator_id}}\"}},{{/creator_id}}   {{#assign_id}}{\"term\": {\"assign_id\": \"{{assign_id}}\"}},{{/assign_id}}   {{#group_id}}{\"term\": {\"group_id\": \"{{group_id}}\"}},{{/group_id}}   {{#event_id}}{\"term\": {\"id\": \"{{event_id}}\"}},{{/event_id}}  {\"has_child\": {\"query\": {\"bool\": {\"should\": [ {{#user_id}}{\"term\": {\"user_id\": \"{{user_id}}\"}},{{/user_id}}   {{#user_id}}{\"term\": {\"receive_user_id\": \"{{user_id}}\"}}{{/user_id}} ]}}, \"type\": \"event_record\"}}]}}}}",
+    "sort": [{"created_at": "desc"}],
+    "default_offset": 0,
+    "default_limit": 10
+  }
+}
+

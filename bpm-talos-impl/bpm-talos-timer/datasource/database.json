@@ -1,0 +1,22 @@
+{
+	"dataSourceConf": {
+		"bpm_family": {
+			"url": "jdbc:mysql://192.168.113.9:3306/bpm_family",
+			"username": "bpm_family",
+			"password": "R4Cm2&7p#ZnuJB1G",
+			"driver": "com.mysql.jdbc.Driver"
+		},
+		"ers_database": {
+			"url": "jdbc:mysql://vpca-zeus-ers-mysql-1.vm.elenet.me:3306/eleme",
+			"username": "eleme_test",
+			"password": "eleme_TEST",
+			"driver": "com.mysql.jdbc.Driver"
+		},
+		"eus_database": {
+			"url": "jdbc:mysql://vpca-zeus-eus-mysql-1.vm.elenet.me:3306/eleme",
+			"username": "eleme_test",
+			"password": "eleme_TEST",
+			"driver": "com.mysql.jdbc.Driver"
+		}
+	}
+}

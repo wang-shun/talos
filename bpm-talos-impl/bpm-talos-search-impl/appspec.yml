@@ -1,0 +1,9 @@
+appid: bpm.talos.search
+version: 1.0.0
+os: linux
+language: java
+apptype: jar
+hooks:
+  ValidateService:
+    - location: sh ./validate.sh
+      timeout: 60

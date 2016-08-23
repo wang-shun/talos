@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="5">
+    <property name="LOG_DIR" value="/data/log/bpm-talos-search" />
+    
+    <pattern line.separator=" " />
+    <appender name="FILE"
+        class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <file>${LOG_DIR}/access.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/access_%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder />
+    </appender>
+    <!-- 输出到syslog server，这个可以去elog的网页https://elog.elenet.me -->
+    <appender name="SYSLOG" class="me.ele.elog.appender.SyslogAppender">
+        <syslogHost>localhost</syslogHost>
+        <facility>LOCAL6</facility>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+    </appender>
+    <!-- 异步appender，在输出日志比较多，并且有性能需求时，必须使用 -->
+    <appender name="ASYNC" class="me.ele.elog.appender.AsyncAppender">
+        <!-- 这个size首先要是2的幂，这是异步的缓冲队列，长度可以修改 -->
+        <buffer size="2048" />
+        <appender-ref ref="SYSLOG" />
+        <appender-ref ref="FILE" />
+    </appender>
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>DEBUG</level>
+		</filter>
+		<encoder />
+	</appender>
+	
+    <root level="INFO">
+		<appender-ref ref="ASYNC" />
+		<appender-ref ref="STDOUT" />
+    </root>
+</configuration>

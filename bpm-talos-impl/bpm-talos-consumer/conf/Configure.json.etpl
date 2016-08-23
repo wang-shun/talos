@@ -1,0 +1,8 @@
+{
+  "commonConf": {
+    "huskarUrl": "{{_ .ELE_HUSKAR_URL}}",
+    "huskarToken": "{{_ .HUSKAR_TOKEN}}",
+    "metricUrl": "{{_ .ELE_STATSD_URL}}",
+    "traceUrl":"{{_ .ELE_TRACE_URL}}"
+  }
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+	<context:component-scan base-package="me.ele.bpm.talos.search.*" />
+	
+	<!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
+		<!--<property name="locations">-->
+			<!--<list>-->
+				<!--<value>classpath:redis.properties</value>-->
+				<!--<value>classpath:esclient.properties</value>-->
+			<!--</list>-->
+		<!--</property>-->
+		<!--<property name="fileEncoding" value="UTF-8" />-->
+		<!--<property name="ignoreResourceNotFound" value="false" />-->
+	<!--</bean>-->
+
+	<!--<bean id = "search4BDService" class="me.ele.bpm.talos.search.service.impl.Search4BDService">-->
+		<!--<property name="host" value="${bd.host}"></property>-->
+		<!--<property name="port" value="${bd.port}"></property>-->
+		<!--<property name="clusterName" value="${bd.cluster}"></property>-->
+	<!--</bean>-->
+
+	<!--<bean id = "searchActivityService" class="me.ele.bpm.talos.search.service.impl.SearchActivityService">-->
+		<!--<property name="host" value="${pandora.host}"></property>-->
+		<!--<property name="port" value="${pandora.port}"></property>-->
+		<!--<property name="clusterName" value="${pandora.cluster}"></property>-->
+	<!--</bean>-->
+
+	<!--<bean id = "searchRstService" class="me.ele.bpm.talos.search.service.impl.SearchRstService">-->
+		<!--<property name="host" value="${pandora.host}"></property>-->
+		<!--<property name="port" value="${pandora.port}"></property>-->
+		<!--<property name="clusterName" value="${pandora.cluster}"></property>-->
+	<!--</bean>-->
+
+	<import resource="classpath:bpm-talos-index.xml"/>
+</beans>

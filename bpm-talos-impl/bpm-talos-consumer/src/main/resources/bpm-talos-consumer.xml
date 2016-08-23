@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:rabbit="http://www.springframework.org/schema/rabbit" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+		http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd">
+
+	<context:component-scan base-package="me.ele.bpm.talos.consumer.*" />
+
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:consumer.properties</value>
+				<value>classpath:mqcfg.properties</value>
+			</list>
+		</property>
+		<property name="fileEncoding" value="UTF-8" />
+		<property name="ignoreResourceNotFound" value="false" />
+	</bean>
+	
+	<task:executor id="executor" pool-size="5" />
+	<task:scheduler id="scheduler" pool-size="10" />
+	<task:annotation-driven executor="executor" scheduler="scheduler" />
+	
+	<bean id="connectionFactory" class="com.rabbitmq.client.ConnectionFactory">
+		<property name="host" value="${mq.host}"/>
+		<property name="port" value="${mq.port}"/>
+		<property name="virtualHost" value="${mq.virtual.host}"/>
+		<property name="username" value="${mq.username}"/>
+		<property name="password" value="${mq.password}"/>
+		<property name="automaticRecoveryEnabled" value="true"/>
+	</bean>
+	
+    <bean id="indexSequence" class="me.ele.bpm.talos.consumer.sequence.IndexSequence">
+    	<property name="nThreads" value="${nThreads}"/>
+    	<property name="timeTip" value="${timeTip}"/>
+    	<property name="maxCycle" value="${maxCycle}"/>
+    </bean>
+    
+    <bean id="serverConfUtil" class="me.ele.bpm.talos.consumer.main.ServerConfUtil">
+    	<property name="etraceUrl" value="${traceUrl}"/>
+    </bean>
+    
+    <import resource="classpath:bpm-talos-index.xml"/>
+</beans>

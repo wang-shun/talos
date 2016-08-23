@@ -1,0 +1,23 @@
+{
+  "commonConf": {
+    "huskarUrl": "{{_ .ELE_HUSKAR_URL}}",
+    "huskarToken": "{{_ .HUSKAR_TOKEN}}",
+    "metricUrl": "{{_ .ELE_STATSD_URL}}",
+    "traceUrl":"{{_ .ELE_TRACE_URL}}"
+  },
+  "serverConf": {
+    "name": "Bpm.Talos.Search",
+    "protocol": "json",
+    "group":"local",
+    "port": {{_ .APP_PORT}},
+    "threadPoolSize": 100,
+    "bufferQueueSize": 100,
+    "initializer": "me.ele.bpm.talos.search.soa.SearchServiceInitializer",
+    "interfaces": [
+        "me.ele.bpm.talos.search.service.ISearchOrder4Pandora",
+        "me.ele.bpm.talos.search.service.ISearchOrderService",
+        "me.ele.bpm.talos.search.service.ISearchKnowledgeBaseService",
+        "me.ele.bpm.talos.search.service.ICommonSearchService"
+    ]
+  }
+}

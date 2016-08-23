@@ -1,0 +1,15 @@
+language: java
+version: oraclejdk8
+script:
+   - mvn clean package -U -f bpm-talos-core/pom.xml -DskipTests=true
+after_success:
+   - bpm-talos-impl/bpm-talos-consumer/ci_success.sh
+outfile:
+   - outfile
+notifications:
+   email:
+      - jianming.zhou@ele.me
+branch:
+   master: alpha_stable
+   feature-family: alpha_stable
+   develop: alpha_stable

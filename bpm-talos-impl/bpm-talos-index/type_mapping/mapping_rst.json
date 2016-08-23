@@ -1,0 +1,24 @@
+{
+    "rst_type": {
+        "_id": {
+            "path": "id"
+        },
+        "properties": {
+            "id": {
+                "type": "long"
+            },
+            "is_book": {
+                "type": "boolean",
+                "store": true
+            },
+            "order_mode": {
+                "type": "short",
+                "store": true
+            },
+            "refund_status": {
+                "type": "short",
+                "store": true
+            }
+        }
+    }
+}

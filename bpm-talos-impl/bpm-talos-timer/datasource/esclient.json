@@ -1,0 +1,10 @@
+{
+	"esClientConf":{
+		"alpha-search":[
+			{
+				"host": "talos-es1.alpha.elenet.me",
+				"port": "9300"
+			}
+		]
+	}
+}

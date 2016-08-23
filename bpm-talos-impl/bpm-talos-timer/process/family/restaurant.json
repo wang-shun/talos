@@ -1,0 +1,81 @@
+{
+    "business_name": "ers_restaurant",
+	"cluster_name": "alpha-search",
+    "start_index_key": "ers_restaurant",
+    "start_doctype_key": "restaurant",
+    "doc_mapping": "ers_restaurant",
+    "index_route": {
+        "route_name": "pure_value",
+        "route_params": {
+            "name": "ers_restaurant"
+        }
+    },
+    "doctype_route": {
+        "route_name": "pure_value",
+        "route_params": {
+            "name": "restaurant"
+        }
+    },
+    "slave_limit_name": "time_stamp_limiter",
+    "slave_limit_params": { 
+        "time_stamp": "created_at",
+        "interval": 30
+    },
+    "templateId": 1,
+	"processes": {
+	    "0": {
+	        "database_name": "ers_database",
+	        "table_name": "restaurant",
+	        "doc_preconditions": null,
+	        "table_preconditions": [
+	            ["city_id", "in", [1, 97, 99, 103]],
+	            ["type", "!=", 100]
+	        ],
+	        "doc_according_key": "created_at",
+	        "table_according_key": "created_at",
+	        "select_columns": [
+	        	"id", 
+				"city_id", 
+				"image_hash",
+				"address_text",
+				"name", 
+				"created_at",
+                "updated_at", 
+                "latitude",
+                "longitude", 
+                "is_valid",
+                "busy_level"
+            ], 
+	        "column_map": {
+	            "id": "id",
+	            "city_id": "city_id",
+	            "image_hash": "image_hash",
+	            "address_text": "address_text",
+	            "name": "name",
+	            "created_at": "created_at",
+	            "updated_at": "updated_at",
+	            "latitude": "latitude",
+	            "longitude": "longitude",
+	            "is_valid": "is_valid",
+	            "busy_level": "busy_level"
+	        }, 
+	        "necessary_columns":[]
+	    },
+	    "1": {
+	        "database_name": "eus_database",
+	        "table_name": "restaurant_admin",
+	        "doc_preconditions":[],
+	        "table_preconditions": null,
+	        "doc_according_key": "id",
+	        "table_according_key": "restaurant_id",
+	        "select_columns": [
+	        	"user_id", 
+	        	"restaurant_id"
+	        ],
+	        "column_map": {
+	            "admin_id": "user_id"
+	        }, 
+	        "necessary_columns":[]
+	    }
+	}
+}
